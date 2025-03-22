@@ -1,0 +1,300 @@
+/* === 基础重置 === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* === 整体容器 === */
+body {
+    font-family: 'Ma Shan Zheng', 'Microsoft YaHei', sans-serif;
+    color: #3a3a3a;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f8f9fa;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 200, 200, 0.1);
+    z-index: -1;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* === 标题区 === */
+.header {
+    text-align: center;
+    padding: 40px 0;
+    border-bottom: 2px solid #5B7A81;
+    margin-bottom: 30px;
+}
+
+.main-title {
+    font-family: "华文行楷", "STXingkai", "楷体", "KaiTi", cursive;
+    font-size: 2.8rem;
+    letter-spacing: 4px;
+    color: #2E6171;
+    margin-bottom: 8px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #7A8B8B;
+}
+
+/* === 导航菜单 === */
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 30px 0;
+    padding: 15px 0;
+    border-bottom: 1px dashed #C0C0C0;
+}
+
+.nav-item {
+    font-family: "华文行楷", "STXingkai", "楷体", "KaiTi", cursive;
+    font-size: 1.4rem;
+    color: #2E6171;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    padding: 10px 25px;
+    position: relative;
+    cursor: pointer;
+}
+
+.nav-item::before {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 10%, #C91F37 30%, #C91F37 70%, transparent 90%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.nav-item:hover::before {
+    opacity: 1;
+}
+
+.submenu {
+    display: flex;
+    gap: 20px;
+    margin-left: auto;
+}
+
+/* === 内容区 === */
+.content-section {
+    margin: 40px 0;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.content-section h2 {
+    font-size: 1.8rem;
+    color: #2E6171;
+    margin-bottom: 15px;
+}
+
+/* === 记忆分段 === */
+.memory-section {
+    margin-bottom: 40px;
+}
+
+.memory-section h3 {
+    font-size: 1.5rem;
+    color: #5B7A81;
+    margin-bottom: 10px;
+    border-left: 4px solid #C91F37;
+    padding-left: 10px;
+}
+
+/* === 照片网格 === */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.photo-item img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(201,31,55,0.2);
+}
+
+/* === 弹窗样式 === */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    background: #fff9f0;
+    margin: 10% auto;
+    padding: 30px;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    border: 2px solid #5B7A81;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 28px;
+    color: #C91F37;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.modal-title {
+    font-family: "华文行楷", cursive;
+    font-size: 1.8rem;
+    color: #2E6171;
+    margin-bottom: 15px;
+    border-bottom: 2px dashed #C91F37;
+    padding-bottom: 10px;
+}
+
+.modal-text {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #3a3a3a;
+    text-indent: 2em;
+}
+
+.location-section {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px dashed #C91F37;
+}
+
+.modal-location {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 1.1rem;
+    color: #5B7A81;
+    margin-bottom: 10px;
+}
+
+.location-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #C91F37;
+    border-radius: 4px;
+}
+
+.save-location {
+    background-color: #C91F37;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.save-location:hover {
+    background-color: #a8182d;
+}
+
+/* 音乐模块 */
+#bg-music {
+    position: absolute;
+    left: -999px;
+    opacity: 0;
+}
+
+.music-playing::after {
+    content: "🎵";
+    position: absolute;
+    right: -15px;
+    top: 5px;
+    font-size: 1.2rem;
+    animation: musicNote 1s infinite;
+}
+
+@keyframes musicNote {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* 时光轴样式 */
+.timeline {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline-item {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.timeline-date {
+    width: 100px;
+    background: #C91F37;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.timeline-content {
+    flex: 1;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    margin-left: 20px;
+}
+
+/* 关于页面样式 */
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-content p {
+    margin-bottom: 15px;
+}
+
+.about-content ul {
+    padding-left: 20px;
+}
+
+.about-content li {
+    margin-bottom: 5px;
+}

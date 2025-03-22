@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/ziyemian.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>慕雨青檐 - 檐铃语</title>
+    <style>
+        /* 为信纸旁边的导航链接添加样式 */
+        .sidebar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px 0;
+        }
+        
+        .content-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .content-links a {
+            margin-bottom: 10px;
+            padding: 5px 10px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 4px;
+            text-decoration: none;
+            color: #2E6171;
+            font-family: "华文行楷", "STXingkai", "楷体", "KaiTi", cursive;
+            font-size: 1.2rem;
+        }
+        
+        .content-links a:hover {
+            background: rgba(201, 31, 55, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- 音乐播放器 -->
+    <audio id="bg-music" loop>
+        <source src="assets/music/rain.mp3" type="audio/mpeg">
+        您的浏览器不支持音频播放
+    </audio>
+
+    <!-- 标题区 -->
+    <header class="header">
+        <h1 class="main-title">慕雨青檐</h1>
+        <div class="subtitle">2017-2025 周末特快列车</div>
+    </header>
+
+    <!-- 导航菜单 -->
+    <nav class="nav-menu">
+        <a href="#" class="nav-item" id="music-control">听雨卷</a>
+        <a href="index.html" class="nav-item">拾叶集</a>
+        <a href="xiangyaoshuodehua.html" class="nav-item">檐铃语</a>
+        <a href="timeline.html" class="nav-item">时光轴</a>
+        <a href="about.html" class="nav-item">关于</a>
+    </nav>
+
+    <!-- 原有内容结构保持不变 -->
+    <section class="letter-section">
+        <div class="sidebar">
+            <!-- 添加“健伟寄语”和“小梁祝福”的链接 -->
+            <div class="content-links">
+                <a href="#sangjianwei" class="nav-item">健伟寄语</a>
+                <a href="#liangyan" class="nav-item">小梁祝福</a>
+            </div>
+            
+            <div class="letter-paper">
+                <h2>想要对你说的话</h2>
+                
+                <!-- 仅添加ID标识 -->
+                <div class="letter-content" id="sangjianwei">
+                    <!-- 原有健伟的内容保持不变 -->
+                     <h3>来自健伟</h3>
+                        <p>亲爱的思雨：</p>
+                        <p>见字如晤。</p>
+                        <p>没想到吧！我会以这种方式来准备生日礼物，嘿嘿我这可不是一时起意，我早就有这个想法了，我自认为我没有什么优点，只是上大学后会写点代码希望你能喜欢，我将会把这个网站上传至互联网，让你随时可以访问不管多久，我会一直维护。</p>
+                        <p>这些年，我们一起走过了许多美好的时光。从初中到高中，再到大学，每一个瞬间都像一幅画，深深印在我的记忆里。记得第一次去你学校我真的非常紧张，当时是和海乐一起来的，坐上公交车一直盼望着和你见面，那时候我分不清“长沙”和“陈家”想不到司机喊：“长沙到了，有没有下车的！”我竟置之不理，直到路过一个十字路口我看见你就在那里，我激动得在车上大喊“我要下车，我要下车！！”，想起来怪尴尬的哈哈哈，临走前你给我俩送了礼物简直是对我来说最重要的礼物，谢谢你！后来在你即将毕业时我一个人来到了你的学校，你陪我走过你高中三年走过的路，你带我吃你喜欢的麻辣烫，那天很热，却很美好。</p>
+                        <p>我一直想亲手为你做个礼物，我自我感觉在外面买的礼物是没有自己亲手做的真诚的，可我又没有什么特长，想给你写封信我的字又太丑，想给你做一次手工我自己又是手残党，所以我才出此下策。好了，回到正题，今天是你生日，你就是今天的主角，21岁啦！正式进入‘成年2.0’时代作为你最要好的朋友，我可是见证了你外冷内热的一面——表面上酷酷的，其实心里比谁都温暖。你就是这样，总是默默关心别人，却从不张扬。真的很幸运能认识你，和你成为朋友。</p>
+                        <p>新的一岁，愿你继续做那个独一无二的自己，勇敢追逐梦想，但也别忘了偶尔放松一下，享受生活。无论未来有多忙，我都会一直在你身边，陪你疯、陪你笑、陪你吐槽这个世界。</p>
+                        <p>愿你的21岁充满惊喜、快乐和美好的回忆，愿所有的努力都有回报，所有的梦想都能实现。生日快乐，愿你每天都像今天一样闪闪发光！✨</p>
+                        <p>愿未来的日子里，我们依然能像现在这样，彼此陪伴，共同成长。</p>
+                        <p>此致</p>
+                        <p>敬礼</p>
+                        <p class="letter-signature">—— 你的坠坠坠好的朋友</p>
+                </div>
+
+                <div class="letter-content" id="liangyan">
+                    <!-- 原有小梁的内容保持不变 -->
+                    <h3>来自小梁</h3>
+                        <p>亲爱的思雨：</p>
+                        <p>想不到吧会在这里看见我对你想说的话，首先祝你生日快乐🎂</p>
+                        <p>我希望你可以永远做自己遇到一个对你很好的人理解你包容你</p>
+                        <p>时间真快我们认识快要五年了 都说认识三年的朋友会是一辈子的朋友</p>
+                        <p>我希望我们都在彼此的身边 新的一岁新的开始</p>
+                        <p>更希望你平平安安健健康康 开开心心的</p>
+                        <p>最后呢祝福美丽漂亮可爱的思雨21岁生日快乐🎂</p>
+                        <p class="letter-signature">—— 永远的好姐妹 梁艳</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+       // 音乐控制功能（主页面和子页面都需要添加）
+       const musicPlayer = document.getElementById('bg-music');
+       const musicControl = document.getElementById('music-control');
+       let isPlaying = false;
+       
+       // 初始化音乐状态
+       function initMusic() {
+           // 读取本地存储状态
+           const savedState = localStorage.getItem('musicState');
+           isPlaying = savedState === 'playing';
+           
+           // 同步按钮状态
+           musicPlayer.volume = 0.3;
+           if (isPlaying) {
+               musicPlayer.play().catch(() => {});
+               musicControl.classList.add('music-playing');
+           } else {
+               // 如果之前没有保存状态或者状态是暂停，则尝试自动播放
+               musicPlayer.play().catch(() => {
+                   // 如果自动播放被阻止，则等待用户交互
+                   document.body.addEventListener('click', () => {
+                       musicPlayer.play().catch(() => {});
+                   }, { once: true });
+               });
+           }
+       }
+       
+       // 点击控制
+       musicControl.addEventListener('click', () => {
+           isPlaying = !isPlaying;
+           if (isPlaying) {
+               musicPlayer.play();
+               musicControl.classList.add('music-playing');
+               localStorage.setItem('musicState', 'playing');
+           } else {
+               musicPlayer.pause();
+               musicControl.classList.remove('music-playing');
+               localStorage.setItem('musicState', 'paused');
+           }
+       });
+       
+       // 初始化执行
+       initMusic();
+       
+       // 自动播放处理（需要用户交互）
+       document.body.addEventListener('click', () => {
+           if (isPlaying && musicPlayer.paused) {
+               musicPlayer.play().catch(() => {});
+           }
+       }, { once: true });
+
+        // 页面加载时显示“健伟寄语”的内容
+        window.onload = function() {
+            // 默认显示“健伟寄语”的内容
+            document.getElementById('sangjianwei').style.display = 'block';
+            // 给“健伟寄语”的导航链接添加激活状态
+            document.querySelector('a[href="#sangjianwei"]').classList.add('active');
+        };
+
+        // 处理导航链接的点击事件
+        document.querySelectorAll('.nav-item[href^="#"]').forEach(link => {
+            link.addEventListener('click', function() {
+                // 移除所有激活状态
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                // 添加当前激活状态
+                this.classList.add('active');
+
+                // 隐藏所有内容
+                document.querySelectorAll('.letter-content').forEach(content => {
+                    content.style.display = 'none';
+                });
+
+                // 显示对应的内容
+                const targetId = this.getAttribute('href').substring(1);
+                document.getElementById(targetId).style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>
