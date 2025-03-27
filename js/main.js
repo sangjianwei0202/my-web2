@@ -303,4 +303,41 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+	
+});
+// 按钮点击事件
+document.addEventListener('DOMContentLoaded', () => {
+    const memoryBtns = document.querySelectorAll('.memory-btn');
+    const juniorMemory = document.getElementById('junior-memory');
+    const seniorMemory = document.getElementById('senior-memory');
+    const universityMemory = document.getElementById('university-memory');
+
+    memoryBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // 移除所有按钮的 active 类
+            memoryBtns.forEach(b => b.classList.remove('active'));
+
+            // 为当前点击的按钮添加 active 类
+            btn.classList.add('active');
+
+            // 隐藏所有内容
+            juniorMemory.style.display = 'none';
+            seniorMemory.style.display = 'none';
+            universityMemory.style.display = 'none';
+
+            // 显示对应的内容
+            const period = btn.dataset.period;
+            if (period === 'junior') {
+                juniorMemory.style.display = 'block';
+            } else if (period === 'senior') {
+                seniorMemory.style.display = 'block';
+            } else if (period === 'university') {
+                universityMemory.style.display = 'block';
+            }
+        });
+    });
+
+    // 默认显示初中时光
+    juniorMemory.style.display = 'block';
+    memoryBtns[0].classList.add('active');
 });

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/main.js" defer></script>
+    <link rel="stylesheet" href="css/main.css" />
+    <title>慕雨青檐 - 拾叶集</title>
+</head>
+<style>
+    /* 小花飘落效果 - 更新后样式 */
+	.petal {
+		position: fixed;
+		top: -10%;
+		z-index: 9999;
+		color: rgba(255, 255, 255, 0.9); /* 提高透明度 */
+		text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* 添加光晕效果 */
+		user-select: none;
+		pointer-events: none;
+		font-size: 1.2rem;
+		animation: fall linear forwards;
+		filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.7)); /* 添加投影 */
+	}
+
+	@keyframes fall {
+		to {
+			transform: translateY(110vh) rotate(720deg);
+			opacity: 0.2; /* 下落过程中逐渐变淡 */
+		}
+	}
+	
+</style>
+<body>
+    <audio id="bg-music" loop>
+        <source src="assets/music/rain.mp3" type="audio/mpeg">
+        您的浏览器不支持音频播放
+    </audio>
+    <!-- 标题区 -->
+    <header class="header">
+        <h1 class="main-title">慕雨青檐</h1>
+        <div class="subtitle">2017-2025 周末特快列车</div>
+    </header>
+
+    <!-- 导航菜单 -->
+    <nav class="nav-menu">
+		<a href="#" class="nav-item" id="music-control">听雨卷</a>
+		<a href="huiyi.html" class="nav-item">拾叶集</a>
+		<a href="xiangyaoshuodehua.html" class="nav-item">檐铃语</a>
+		<a href="about.html" class="nav-item">关于</a>
+	</nav>
+
+    
+    <!-- 照片区 -->
+    <section class="content-section">
+        <h2>时光记忆</h2>
+    
+        <!-- 按钮区域 -->
+        <div class="memory-buttons">
+            <button class="memory-btn active" data-period="junior">初中</button>
+            <button class="memory-btn" data-period="senior">高中</button>
+            <button class="memory-btn" data-period="university">大学</button>
+        </div>
+    
+        <!-- 初中时光内容 -->
+        <div class="memory-section" id="junior-memory">
+            <h3>初中时光</h3>
+            <div class="photo-grid">
+                <!-- 初中照片内容保持不变 -->
+                <div class="photo-item">
+                    <img src="assets/images/photo2.jpg" alt="初中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo10.jpg" alt="初中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo20.jpg" alt="初中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo21.jpg" alt="初中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo22.jpg" alt="初中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo23.jpg" alt="初中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo24.jpg" alt="初中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo46.jpg" alt="初中记忆">
+                </div>
+            </div>
+        </div>
+    
+        <!-- 高中时光内容 -->
+        <div class="memory-section" id="senior-memory" style="display: none;">
+            <h3>高中时光</h3>
+            <div class="photo-grid">
+                <!-- 高中照片内容保持不变 -->
+                <div class="photo-item">
+                    <img src="assets/images/photo17.jpg" alt="高中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo25.jpg" alt="高中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo31.jpg" alt="高中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo32.jpg" alt="高中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo33.jpg" alt="高中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo34.jpg" alt="高中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo35.jpg" alt="高中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo36.jpg" alt="高中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo37.jpg" alt="高中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo38.jpg" alt="高中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo40.jpg" alt="高中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo41.jpg" alt="高中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo42.jpg" alt="高中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo43.jpg" alt="高中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo44.jpg" alt="高中记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo45.jpg" alt="高中记忆">
+                </div>
+            </div>
+        </div>
+    
+        <!-- 大学时光内容 -->
+        <div class="memory-section" id="university-memory" style="display: none;">
+            <h3>大学时光</h3>
+            <div class="photo-grid">
+                <!-- 大学照片内容保持不变 -->
+                <div class="photo-item">
+                    <img src="assets/images/photo1.jpg" alt="大学记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo9.jpg" alt="大学记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo11.jpg" alt="大学记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo13.jpg" alt="大学记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo15.jpg" alt="大学记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo18.jpg" alt="大学记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo27.jpg" alt="大学记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo28.jpg" alt="大学记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo29.jpg" alt="大学记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo30.jpg" alt="大学记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo47.JPG" alt="大学记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo48.jpg" alt="大学记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo55.jpg" alt="大学记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo64.jpg" alt="大学记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo65.jpg" alt="大学记忆">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/images/photo66.JPG" alt="大学记忆">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 弹窗结构 -->
+    <div id="memory-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 class="modal-title"></h3>
+            <p class="modal-text"></p>
+        </div>
+    </div>
+	<script>
+	    // 小花飘落效果
+	    function createPetals() {
+	        const petals = ['❀', '✿', '❁', '✾', '❃', '🌸', '💮'];
+	        const petalCount = 30;
+	        
+	        for (let i = 0; i < petalCount; i++) {
+	            setTimeout(() => {
+	                const petal = document.createElement('div');
+	                petal.innerHTML = petals[Math.floor(Math.random() * petals.length)];
+	                petal.classList.add('petal');
+	                
+	                // 随机位置
+	                petal.style.left = Math.random() * 100 + 'vw';
+	                
+	                // 随机动画持续时间 (5-15秒)
+	                const duration = 5 + Math.random() * 10;
+	                petal.style.animationDuration = duration + 's';
+	                
+	                // 随机延迟 (0-5秒)
+	                petal.style.animationDelay = Math.random() * 5 + 's';
+	                
+	                // 随机大小
+	                const size = 0.5 + Math.random() * 1.5;
+	                petal.style.fontSize = size + 'rem';
+	                
+	                // 随机透明度
+	                petal.style.opacity = 0.5 + Math.random() * 0.5;
+	                
+	                document.body.appendChild(petal);
+	                
+	                // 动画结束后移除花瓣
+	                setTimeout(() => {
+	                    petal.remove();
+	                }, duration * 1000);
+	            }, i * 300); // 每隔300ms创建一个新花瓣
+	        }
+	        
+	        // 每隔一段时间重新创建花瓣
+	        setTimeout(createPetals, petalCount * 300 + 5000);
+	    }
+	    
+	    // 页面加载后开始花瓣动画
+	    window.addEventListener('load', createPetals);
+	</script>
+</body>
+</html>

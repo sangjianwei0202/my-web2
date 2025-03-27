@@ -3,188 +3,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/main.js" defer></script>
-    <link rel="stylesheet" href="css/main.css" />
-    <title>慕雨青檐 - 拾叶集</title>
+    <title>慕雨青檐 - 信封</title>
+    <style>
+        /* 基础样式 */
+        body {
+            background-color: #f5f1e8;
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        
+        /* 信封容器 */
+        .envelope-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* 信封主体 */
+        .envelope {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            height: 400px;
+            background: #fff9f0;
+            border: 2px solid #d4b483;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.5s ease;
+            z-index: 1;
+        }
+        
+        /* 信封盖 - 三角形 */
+        .envelope:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 200px 300px 0 300px;
+            border-color: #f8f0e0 transparent transparent transparent;
+            transform-origin: top;
+            transform: rotateX(0deg);
+            transition: all 0.5s ease 0.3s;
+            z-index: 2;
+        }
+        
+        /* 信封打开状态 */
+        .envelope.open:before {
+            transform: rotateX(180deg);
+        }
+        
+        /* 信封淡出效果 */
+        .envelope.fade-out {
+            opacity: 0;
+            transform: translateY(-50px);
+            transition: all 0.5s ease;
+        }
+        
+        /* 火漆印章 */
+        .seal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: #C91F37;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 3;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .seal:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .seal:after {
+            content: '慕';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: "华文行楷", cursive;
+            font-size: 2rem;
+        }
+        
+        /* 信纸内容 */
+        .letter-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 560px;
+            height: 360px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+            z-index: 0;
+            overflow-y: auto;
+        }
+        
+        .letter-content.show {
+            opacity: 1;
+            visibility: visible;
+            z-index: 4;
+        }
+        
+        /* 标题区 */
+        .header {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.5s ease 0.3s;
+            z-index: 5;
+        }
+        
+        .header.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .main-title {
+            font-family: "华文行楷", cursive;
+            font-size: 2.5rem;
+            color: #2E6171;
+            margin: 0;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        /* 信纸内容样式 */
+        .intro-title {
+            font-family: "华文行楷", cursive;
+            font-size: 2.2rem;
+            color: #2E6171;
+            margin-bottom: 20px;
+            border-bottom: 2px dashed #C91F37;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        
+        .intro-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: left;
+            text-indent: 2em;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        .enter-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto 0;
+            padding: 12px 0;
+            background: #C91F37;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-family: "华文行楷", cursive;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .enter-btn:hover {
+            background: #a8182d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+    </style>
 </head>
 <body>
     <audio id="bg-music" loop>
         <source src="assets/music/rain.mp3" type="audio/mpeg">
         您的浏览器不支持音频播放
     </audio>
-    <!-- 标题区 -->
+    
+    <!-- 标题区 - 初始隐藏 -->
     <header class="header">
         <h1 class="main-title">慕雨青檐</h1>
         <div class="subtitle">2017-2025 周末特快列车</div>
     </header>
 
-    <!-- 导航菜单 -->
-    <nav class="nav-menu">
-        <a href="#" class="nav-item" id="music-control">听雨卷</a>
-        <a href="index.html" class="nav-item">拾叶集</a>
-        <a href="xiangyaoshuodehua.html" class="nav-item">檐铃语</a>
-        <a href="timeline.html" class="nav-item">时光轴</a>
-        <a href="about.html" class="nav-item">关于</a>
-    </nav>
-
-    <!-- 照片区 -->
-    <section class="content-section">
-        <h2>时光记忆</h2>
-
-        <!-- 初中时光 -->
-        <div class="memory-section">
-            <h3>初中时光</h3>
-            <div class="photo-grid">
-                <div class="photo-item">
-                    <img src="assets/images/photo2.jpg" alt="初中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo10.jpg" alt="初中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo20.jpg" alt="初中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo21.jpg" alt="初中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo22.jpg" alt="初中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo23.jpg" alt="初中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo24.jpg" alt="初中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo46.jpg" alt="初中记忆">
-                </div>
-            </div>
+    <!-- 信封容器 -->
+    <div class="envelope-container">
+        <!-- 信封 -->
+        <div class="envelope" id="envelope">
+            <!-- 火漆印章 -->
+            <div class="seal" id="seal"></div>
         </div>
-
-        <!-- 高中时光 -->
-        <div class="memory-section">
-            <h3>高中时光</h3>
-            <div class="photo-grid">
-                <div class="photo-item">
-                    <img src="assets/images/photo17.jpg" alt="高中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo25.jpg" alt="高中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo31.jpg" alt="高中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo32.jpg" alt="高中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo33.jpg" alt="高中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo34.jpg" alt="高中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo35.jpg" alt="高中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo36.jpg" alt="高中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo37.jpg" alt="高中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo38.jpg" alt="高中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo40.jpg" alt="高中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo41.jpg" alt="高中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo42.jpg" alt="高中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo43.jpg" alt="高中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo44.jpg" alt="高中记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo45.jpg" alt="高中记忆">
-                </div>
+        
+        <!-- 信纸内容 - 初始隐藏 -->
+        <div class="letter-content" id="letter-content">
+            <h2 class="intro-title">前言</h2>
+            <div class="intro-content">
+                <p>欢迎登上这趟特别的"周末特快列车"，这是一段穿越时光的旅程，记录着我们从2017到2025年的珍贵回忆。</p>
+                <p>在这个数字空间里，我收集了我们一起走过的点点滴滴，从初中时代的青涩，到高中时期的奋斗，再到大学时光的成长。每一张照片，每一段文字，都是时光留下的印记。</p>
+                <p>这个网站是我送给你的特别礼物，它不仅仅是一个回忆录，更是一个会随着时间不断生长的记忆花园。在这里，你可以随时回望我们一起走过的路，也可以看到我们未来的新篇章。</p>
+                <p>希望你喜欢这份特别的礼物，愿我们的友谊如同这网站一样，历久弥新。</p>
             </div>
-        </div>
-
-        <!-- 大学时光 -->
-        <div class="memory-section">
-            <h3>大学时光</h3>
-            <div class="photo-grid">
-                <div class="photo-item">
-                    <img src="assets/images/photo1.jpg" alt="大学记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo9.jpg" alt="大学记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo11.jpg" alt="大学记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo13.jpg" alt="大学记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo15.jpg" alt="大学记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo18.jpg" alt="大学记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo27.jpg" alt="大学记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo28.jpg" alt="大学记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo29.jpg" alt="大学记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo30.jpg" alt="大学记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo47.JPG" alt="大学记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo48.jpg" alt="大学记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo55.jpg" alt="大学记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo64.jpg" alt="大学记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo65.jpg" alt="大学记忆">
-                </div>
-                <div class="photo-item">
-                    <img src="assets/images/photo66.JPG" alt="大学记忆">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 文字记录区 -->
-    <section class="content-section">
-        <h2>檐下絮语</h2>
-    </section>
-
-    <!-- 弹窗结构 -->
-    <div id="memory-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3 class="modal-title"></h3>
-            <p class="modal-text"></p>
+            <a href="huiyi.html" class="enter-btn">开启回忆之旅</a>
         </div>
     </div>
+
+    <script>
+        // 音乐控制功能
+        const musicPlayer = document.getElementById('bg-music');
+        const musicControl = document.getElementById('music-control');
+        let isPlaying = false;
+        
+        // 初始化音乐状态
+        function initMusic() {
+            const savedState = localStorage.getItem('musicState');
+            isPlaying = savedState === 'playing';
+            
+            musicPlayer.volume = 0.3;
+            if (isPlaying) {
+                musicPlayer.play().catch(() => {});
+                if(musicControl) musicControl.textContent = '暂停音乐';
+            } else {
+                musicPlayer.play().catch(() => {
+                    document.body.addEventListener('click', () => {
+                        musicPlayer.play().catch(() => {});
+                    }, { once: true });
+                });
+            }
+        }
+        
+        // 点击控制音乐
+        if(musicControl) {
+            musicControl.addEventListener('click', (e) => {
+                e.preventDefault();
+                isPlaying = !isPlaying;
+                if (isPlaying) {
+                    musicPlayer.play();
+                    musicControl.textContent = '暂停音乐';
+                    localStorage.setItem('musicState', 'playing');
+                } else {
+                    musicPlayer.pause();
+                    musicControl.textContent = '播放音乐';
+                    localStorage.setItem('musicState', 'paused');
+                }
+            });
+        }
+        
+        // 初始化执行
+        initMusic();
+        
+        // 自动播放处理
+        document.body.addEventListener('click', () => {
+            if (isPlaying && musicPlayer.paused) {
+                musicPlayer.play().catch(() => {});
+            }
+        }, { once: true });
+
+        // 信封交互效果
+        document.addEventListener('DOMContentLoaded', () => {
+            const seal = document.getElementById('seal');
+            const envelope = document.getElementById('envelope');
+            const letterContent = document.getElementById('letter-content');
+            const header = document.querySelector('.header');
+            
+            seal.addEventListener('click', () => {
+                // 打开信封
+                envelope.classList.add('open');
+                
+                // 信封淡出
+                setTimeout(() => {
+                    envelope.classList.add('fade-out');
+                }, 500);
+                
+                // 显示信纸内容
+                setTimeout(() => {
+                    letterContent.classList.add('show');
+                }, 800);
+                
+                // 显示标题
+                setTimeout(() => {
+                    header.classList.add('show');
+                }, 1000);
+                
+                // 点击后隐藏印章
+                setTimeout(() => {
+                    seal.style.opacity = '0';
+                    setTimeout(() => {
+                        seal.style.display = 'none';
+                    }, 300);
+                }, 500);
+            });
+        });
+    </script>
 </body>
 </html>

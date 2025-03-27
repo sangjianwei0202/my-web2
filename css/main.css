@@ -13,7 +13,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background: #f8f9fa;
+    background: linear-gradient(180deg, #c4d9dd 20%, #99b4b9 80%);
 }
 
 body::before {
@@ -23,9 +23,10 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 200, 200, 0.1);
+    background: url('assets/images/cloud-pattern.png') repeat;
+    opacity: 0.3;
     z-index: -1;
-}
+}      
 
 a {
     text-decoration: none;
@@ -90,17 +91,11 @@ a {
     opacity: 1;
 }
 
-.submenu {
-    display: flex;
-    gap: 20px;
-    margin-left: auto;
-}
-
 /* === 内容区 === */
 .content-section {
     margin: 40px 0;
     padding: 20px;
-    background: white;
+    background-color: #e0f7fa;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
@@ -197,40 +192,6 @@ a {
     text-indent: 2em;
 }
 
-.location-section {
-    margin-top: 20px;
-    padding-top: 10px;
-    border-top: 1px dashed #C91F37;
-}
-
-.modal-location {
-    font-family: 'Ma Shan Zheng', cursive;
-    font-size: 1.1rem;
-    color: #5B7A81;
-    margin-bottom: 10px;
-}
-
-.location-input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #C91F37;
-    border-radius: 4px;
-}
-
-.save-location {
-    background-color: #C91F37;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.save-location:hover {
-    background-color: #a8182d;
-}
-
 /* 音乐模块 */
 #bg-music {
     position: absolute;
@@ -253,34 +214,6 @@ a {
     100% { transform: scale(1); }
 }
 
-/* 时光轴样式 */
-.timeline {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.timeline-item {
-    display: flex;
-    margin-bottom: 30px;
-}
-
-.timeline-date {
-    width: 100px;
-    background: #C91F37;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.timeline-content {
-    flex: 1;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 5px;
-    margin-left: 20px;
-}
-
 /* 关于页面样式 */
 .about-content {
     max-width: 800px;
@@ -297,4 +230,34 @@ a {
 
 .about-content li {
     margin-bottom: 5px;
+}
+/* 按钮 */
+/* 按钮区域样式 */
+.memory-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.memory-btn {
+    padding: 10px 20px;
+    font-family: "华文行楷", "STXingkai", "楷体", "KaiTi", cursive;
+    font-size: 1.2rem;
+    color: #2E6171;
+    background: transparent;
+    border: 2px solid #C91F37;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.memory-btn:hover {
+    background-color: #C91F37;
+    color: white;
+}
+
+.memory-btn.active {
+    background-color: #C91F37;
+    color: white;
 }
