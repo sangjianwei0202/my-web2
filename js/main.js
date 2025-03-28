@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         "photo32": {
             title: "宿舍",
-            content: "一抹夕阳洒在了你们的脸上",
+            content: "一抹夕阳洒在了你们的脸上，这就是青春啊",
             location: "宿舍"
         },
         "photo33": {
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: "某个地方"
         },
         "photo37": {
-            title: "间谍",
+            title: "间谍？",
             content: "嘿嘿，现在知道我哪来的这么多照片了吧",
             location: "某个地方"
         },
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         "photo41": {
             title: "集体活动",
-            content: "听说你们老班给你们过生日了，真好...",
+            content: "听说你们老班给你们过生日了，真好",
             location: "教室"
         },
         "photo42": {
@@ -139,12 +139,12 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         "photo13": {
             title: "美照",
-            content: "你真的好会拍",
+            content: "你真的好会拍，美到我心坎上了(❤ ω ❤)",
             location: "某个地方"
         },
         "photo15": {
             title: "在干嘛",
-            content: "在干嘛呢，原来在逛gai啊",
+            content: "在干嘛呢，原来在逛gai啊，哈哈哈",
             location: "某个地方"
         },
         "photo18": {
@@ -169,12 +169,12 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         "photo47": {
             title: "穿越",
-            content: "好像一下回到了几十年前",
+            content: "好像一下回到了几十年前❤",
             location: "某个地方"
         },
-        "photo48": {
-            title: "自信",
-            content: "果然,相机给你是个十分正确的决定",
+        "photo56": {
+            title: "是妆照吗",
+            content: "小脸红彤彤心脏怦怦怦😊",
             location: "某个地方"
         },
         "photo55": {
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         "photo2": {
             title: "丑照",
-            content: "我拍了你的丑照，可以不怪罪我吗，嘻嘻",
+            content: "我拍了你的丑照，可以不怪我吗，嘻嘻",
             location: "某个地方"
         }
     };

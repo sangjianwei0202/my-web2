@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="css/main.css" />
     <title>慕雨青檐 - 檐铃语</title>
     <style>
+		/* 使用CSS内置纹理效果替代图片 */
+		body {
+		  background-color: #FDF0F5;
+		  background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+		                   linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
+		  background-size: 20px 20px; /* 模拟宣纸网格纹理 */
+		}
         /* 为信纸旁边的导航链接添加样式 */
         .sidebar {
             display: flex;
@@ -35,12 +42,34 @@
         .content-links a:hover {
             background: rgba(201, 31, 55, 0.1);
         }
+		    
+			/* 更新蛋糕飘落效果 */
+		.cake {
+			position: fixed;
+			top: -10%;
+			z-index: 9999;
+			color: rgba(255, 220, 180, 0.9); /* 蛋糕颜色 */
+			text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+			user-select: none;
+			pointer-events: none;
+			font-size: 1.2rem;
+			animation: fall linear forwards;
+			filter: drop-shadow(0 0 4px rgba(255, 200, 150, 0.7));
+		}
+		
+		@keyframes fall {
+			to {
+				transform: translateY(110vh) rotate(720deg);
+				opacity: 0.2;
+			}
+		}
+			
     </style>
 </head>
 <body>
     <!-- 音乐播放器 -->
     <audio id="bg-music" loop>
-        <source src="assets/music/rain.mp3" type="audio/mpeg">
+        <source src="assets/music/rain2.mp3" type="audio/mpeg">
         您的浏览器不支持音频播放
     </audio>
 
@@ -85,6 +114,7 @@
                         <p>此致</p>
                         <p>敬礼</p>
                         <p class="letter-signature">—— 你的坠坠坠好的朋友</p>
+						<p>我还有好多好多话想和你说...</p>
                 </div>
 
                 <div class="letter-content" id="liangyan">
@@ -183,6 +213,49 @@
                 document.getElementById(targetId).style.display = 'block';
             });
         });
+		function createPetals() {
+		            // 使用蛋糕相关的emoji符号
+		            const cakes = ['🎂', '🍰', '🧁', '🍮', '🍩', '🍪', '🥮', '🍫', '🍬'];
+		            const cakeCount = 20; // 减少数量避免太密集
+		            
+		            for (let i = 0; i < cakeCount; i++) {
+		                setTimeout(() => {
+		                    const cake = document.createElement('div');
+		                    cake.innerHTML = cakes[Math.floor(Math.random() * cakes.length)];
+		                    cake.classList.add('cake');
+		                    
+		                    // 随机位置
+		                    cake.style.left = Math.random() * 100 + 'vw';
+		                    
+		                    // 随机动画持续时间 (8-18秒)
+		                    const duration = 8 + Math.random() * 10;
+		                    cake.style.animationDuration = duration + 's';
+		                    
+		                    // 随机延迟 (0-5秒)
+		                    cake.style.animationDelay = Math.random() * 5 + 's';
+		                    
+		                    // 随机大小
+		                    const size = 0.8 + Math.random() * 1.5;
+		                    cake.style.fontSize = size + 'rem';
+		                    
+		                    // 随机透明度
+		                    cake.style.opacity = 0.6 + Math.random() * 0.4;
+		                    
+		                    document.body.appendChild(cake);
+		                    
+		                    // 动画结束后移除蛋糕
+		                    setTimeout(() => {
+		                        cake.remove();
+		                    }, duration * 1000);
+		                }, i * 500); // 每隔500ms创建一个新蛋糕
+		            }
+		            
+		            // 每隔一段时间重新创建蛋糕
+		            setTimeout(createPetals, cakeCount * 500 + 10000); // 延长间隔时间
+		        }
+		        
+		        // 页面加载后开始蛋糕动画
+		        window.addEventListener('load', createPetals);
     </script>
 </body>
 </html>
