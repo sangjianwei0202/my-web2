@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/ziyemian.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>慕雨青檐 - 檐铃语</title>
+    <style>
+        /* 使用CSS内置纹理效果替代图片 */
+        body {
+            background-color: #FDF0F5;
+            background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+                             linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
+            background-size: 20px 20px; /* 模拟宣纸网格纹理 */
+        }
+
+        /* 为信纸旁边的导航链接添加样式 */
+        .sidebar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px 0;
+        }
+
+        .content-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .content-links a {
+            margin-bottom: 10px;
+            padding: 5px 10px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 4px;
+            text-decoration: none;
+            color: #2E6171;
+            font-family: "华文行楷", "STXingkai", "楷体", "KaiTi", cursive;
+            font-size: 1.2rem;
+        }
+
+        .content-links a:hover {
+            background: rgba(201, 31, 55, 0.1);
+        }
+
+        /* 礼花粒子基础样式 */
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: firework-animation 1s ease-out forwards;
+            transform: translate(-50%, -50%);
+            z-index: 2; /* 确保在气球上方 */
+        }
+
+        /* 礼花爆炸动画 */
+        @keyframes firework-animation {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty));
+                opacity: 0;
+            }
+        }
+
+        /* 限制礼花动画的容器 */
+        .firework-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* 气球束容器 */
+        .balloon-bouquet {
+            position: fixed;
+            bottom: 200px; /* 调整气球束的垂直位置 */
+            width: 120px;
+            z-index: 999;
+            pointer-events: none;
+        }
+
+        /* 左侧气球束 */
+        .bouquet-left {
+            left: 5%;
+            transform: rotate(-5deg);
+        }
+
+        /* 右侧气球束 */
+        .bouquet-right {
+            right: 5%;
+            transform: rotate(5deg);
+        }
+
+        /* 单个气球样式 */
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 60px;
+            border-radius: 50%;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* 气球高光效果 */
+        .balloon::after {
+            content: "";
+            position: absolute;
+            top: 15%;
+            left: 25%;
+            width: 15%;
+            height: 15%;
+            background: rgba(255,255,255,0.4);
+            border-radius: 50%;
+        }
+
+        /* 气球绳子 */
+        .string {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            width: 2px;
+            height: 40px;
+            background: #999;
+            transform: translateX(-50%);
+        }
+
+        /* 气球浮动动画 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+        }
+
+        /* 左侧气球位置和颜色 */
+        .bouquet-left .balloon:nth-child(1) { 
+            top: 0; left: 0; 
+            background: #FF6B6B; 
+            animation-delay: 0s; 
+        }
+        .bouquet-left .balloon:nth-child(2) { 
+            top: 10px; left: 40px; 
+            background: #4ECDC4; 
+            animation-delay: 0.2s; 
+        }
+        .bouquet-left .balloon:nth-child(3) { 
+            top: 30px; left: 20px; 
+            background: #FFE66D; 
+            animation-delay: 0.4s; 
+        }
+        .bouquet-left .balloon:nth-child(4) { 
+            top: 50px; left: 60px; 
+            background: #FF9F1C; 
+            animation-delay: 0.6s; 
+        }
+        .bouquet-left .balloon:nth-child(5) { 
+            top: 70px; left: 30px; 
+            background: #A8D8EA; 
+            animation-delay: 0.8s; 
+        }
+        .bouquet-left .balloon:nth-child(6) { 
+            top: 90px; left: 10px; 
+            background: #FF85A2; 
+            animation-delay: 1s; 
+        }
+        .bouquet-left .balloon:nth-child(7) { 
+            top: 110px; left: 50px; 
+            background: #A0E7E5; 
+            animation-delay: 1.2s; 
+        }
+
+        /* 右侧气球位置和颜色 */
+        .bouquet-right .balloon:nth-child(1) { 
+            top: 0; right: 0; 
+            background: #FF85A2; 
+            animation-delay: 0.1s; 
+        }
+        .bouquet-right .balloon:nth-child(2) { 
+            top: 15px; right: 35px; 
+            background: #FFE66D; 
+            animation-delay: 0.3s; 
+        }
+        .bouquet-right .balloon:nth-child(3) { 
+            top: 35px; right: 15px; 
+            background: #A0E7E5; 
+            animation-delay: 0.5s; 
+        }
+        .bouquet-right .balloon:nth-child(4) { 
+            top: 55px; right: 55px; 
+            background: #FF6B6B; 
+            animation-delay: 0.7s; 
+        }
+        .bouquet-right .balloon:nth-child(5) { 
+            top: 75px; right: 25px; 
+            background: #4ECDC4; 
+            animation-delay: 0.9s; 
+        }
+        .bouquet-right .balloon:nth-child(6) { 
+            top: 95px; right: 5px; 
+            background: #FF9F1C; 
+            animation-delay: 1.1s; 
+        }
+        .bouquet-right .balloon:nth-child(7) { 
+            top: 115px; right: 45px; 
+            background: #A8D8EA; 
+            animation-delay: 1.3s; 
+        }
+
+        /* 气球束的绳子 */
+        .bouquet-string {
+            position: absolute;
+            bottom: -100px;
+            left: 50%;
+            width: 3px;
+            height: 100px;
+            background: linear-gradient(to bottom, #999, #666);
+            transform: translateX(-50%);
+            z-index: -1;
+        }
+		/* 更新蛋糕飘落效果 */
+		.cake {
+			position: fixed;
+			top: -10%;
+			z-index: 9999;
+			color: rgba(255, 220, 180, 0.9); /* 蛋糕颜色 */
+			text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+			user-select: none;
+			pointer-events: none;
+			font-size: 1.2rem;
+			animation: fall linear forwards;
+			filter: drop-shadow(0 0 4px rgba(255, 200, 150, 0.7));
+		}
+		
+		@keyframes fall {
+			to {
+				transform: translateY(110vh) rotate(720deg);
+				opacity: 0.2;
+			}
+		}
+    </style>
+</head>
+<body>
+    <!-- 音乐播放器 -->
+    <audio id="bg-music" loop>
+        <source src="assets/music/rain2.mp3" type="audio/mpeg">
+        您的浏览器不支持音频播放
+    </audio>
+
+    <!-- 标题区 -->
+    <header class="header">
+        <h1 class="main-title">慕雨青檐</h1>
+        <div class="subtitle">2017-2025 周末特快列车</div>
+    </header>
+
+    <!-- 导航菜单 -->
+    <nav class="nav-menu">
+        <a href="#" class="nav-item" id="music-control">听雨卷</a>
+        <a href="huiyi.html" class="nav-item">拾叶集</a>
+        <a href="xiangyaoshuodehua.html" class="nav-item">檐铃语</a>
+        <a href="guanyunge.html" class="nav-item">观云阁</a>
+        <a href="about.html" class="nav-item">关于</a>
+    </nav>
+
+    <!-- 礼花动画容器 -->
+    <div class="firework-container" id="fireworkContainer"></div>
+
+    <!-- 左侧气球束 (7个) -->
+    <div class="balloon-bouquet bouquet-left">
+        <div class="balloon"><div class="string"></div></div>
+        <div class="balloon"><div class="string"></div></div>
+        <div class="balloon"><div class="string"></div></div>
+        <div class="balloon"><div class="string"></div></div>
+        <div class="balloon"><div class="string"></div></div>
+        <div class="balloon"><div class="string"></div></div>
+        <div class="balloon"><div class="string"></div></div>
+        <div class="bouquet-string"></div>
+    </div>
+
+    <!-- 右侧气球束 (7个) -->
+    <div class="balloon-bouquet bouquet-right">
+        <div class="balloon"><div class="string"></div></div>
+        <div class="balloon"><div class="string"></div></div>
+        <div class="balloon"><div class="string"></div></div>
+        <div class="balloon"><div class="string"></div></div>
+        <div class="balloon"><div class="string"></div></div>
+        <div class="balloon"><div class="string"></div></div>
+        <div class="balloon"><div class="string"></div></div>
+        <div class="bouquet-string"></div>
+    </div>
+
+    <!-- 原有内容结构保持不变 -->
+    <section class="letter-section">
+        <div class="sidebar">
+            <!-- 添加“健伟寄语”和“小梁祝福”的链接 -->
+            <div class="content-links">
+                <a href="#sangjianwei" class="nav-item">健伟寄语</a>
+                <a href="#liangyan" class="nav-item">小梁祝福</a>
+            </div>
+            
+            <div class="letter-paper">
+                <h2>想要对你说的话</h2>
+                
+                <!-- 仅添加ID标识 -->
+                <div class="letter-content" id="sangjianwei">
+                    <!-- 原有健伟的内容保持不变 -->
+                     <h3>来自健伟</h3>
+                        <p>亲爱的思雨：</p>
+                        <p>见字如晤。</p>
+                        <p>没想到吧！我会以这种方式来准备生日礼物，嘿嘿我这可不是一时起意，我早就想这么干了😀，我自认为我没有什么优点，只是上大学后会写点代码希望你能喜欢，我将会把这个网站上传至互联网，让你随时可以访问不管多久，我会一直维护。</p>
+                        <p>这些年，我们一起走过了许多美好的时光。从初中到高中，再到大学，每一个瞬间都像一幅画，深深印在我的记忆里。记得第一次去你学校我真的非常紧张，当时是和海乐一起来的，坐上公交车一直盼望着和你见面，那时候我分不清“长沙”和“陈家”想不到司机喊：“长沙到了，有没有下车的！”我竟置之不理，直到路过一个十字路口我看见你就在那里，我激动得在车上大喊“我要下车，我要下车！！”，想起来怪尴尬的哈哈哈，临走前你给我俩送了礼物简直是对我来说最重要的礼物，谢谢你！后来在你即将毕业时我一个人来到了你的学校，你陪我走过你高中三年走过的路，你带我吃你喜欢的麻辣烫，那天很热，却很美好。</p>
+                        <p>我一直想亲手为你做个礼物，我自我感觉在外面买的礼物是没有自己亲手做的真诚的，可我又没有什么特长，想给你写封信我的字又太丑，想给你做一次手工我自己又是手残党，所以我才出此下策。好了，回到正题，今天是你生日，你就是今天的主角，21岁啦！正式进入‘成年2.0’时代作为你最要好的朋友，我可是见证了你外冷内热的一面——表面上酷酷的，其实心里比谁都温暖。你就是这样，总是默默关心别人，却从不张扬。真的很幸运能认识你，和你成为朋友。</p>
+                        <p>新的一岁，愿你继续做那个独一无二的自己，勇敢追逐梦想，但也别忘了偶尔放松一下，享受生活。无论未来有多忙，我都会一直在你身边，陪你疯、陪你笑、陪你吐槽这个世界。</p>
+                        <p>愿你的21岁充满惊喜、快乐和美好的回忆，愿所有的努力都有回报，所有的梦想都能实现。生日快乐，愿你每天都像今天一样闪闪发光！✨</p>
+                        <p>愿未来的日子里，我们依然能像现在这样，彼此陪伴，共同成长。</p>
+                        <p>此致</p>
+                        <p>敬礼</p>
+                        <p class="letter-signature">—— 你的坠坠坠好的朋友</p>
+						<p>我还有好多好多话想和你说...</p>
+                </div>
+
+                <div class="letter-content" id="liangyan">
+                    <!-- 原有小梁的内容保持不变 -->
+                    <h3>来自小梁</h3>
+                        <p>亲爱的思雨：</p>
+                        <p>想不到吧会在这里看见我对你想说的话，首先祝你生日快乐🎂</p>
+                        <p>我希望你可以永远做自己遇到一个对你很好的人理解你包容你</p>
+                        <p>时间真快我们认识快要五年了 都说认识三年的朋友会是一辈子的朋友</p>
+                        <p>我希望我们都在彼此的身边 新的一岁新的开始</p>
+                        <p>更希望你平平安安健健康康 开开心心的</p>
+                        <p>最后呢祝福美丽漂亮可爱的思雨21岁生日快乐🎂</p>
+                        <p class="letter-signature">—— 永远的好姐妹 梁艳</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // 音乐控制功能
+        const musicPlayer = document.getElementById('bg-music');
+        const musicControl = document.getElementById('music-control');
+        let isPlaying = false;
+        
+        // 初始化音乐状态
+        function initMusic() {
+            const savedState = localStorage.getItem('musicState');
+            isPlaying = savedState === 'playing';
+            
+            musicPlayer.volume = 0.3;
+            if (isPlaying) {
+                musicPlayer.play().catch(() => {});
+                musicControl.classList.add('music-playing');
+            } else {
+                musicPlayer.play().catch(() => {
+                    document.body.addEventListener('click', () => {
+                        musicPlayer.play().catch(() => {});
+                    }, { once: true });
+                });
+            }
+        }
+        
+        // 点击控制
+        musicControl.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            if (isPlaying) {
+                musicPlayer.play();
+                musicControl.classList.add('music-playing');
+                localStorage.setItem('musicState', 'playing');
+            } else {
+                musicPlayer.pause();
+                musicControl.classList.remove('music-playing');
+                localStorage.setItem('musicState', 'paused');
+            }
+        });
+        
+        // 初始化执行
+        initMusic();
+        
+        // 自动播放处理
+        document.body.addEventListener('click', () => {
+            if (isPlaying && musicPlayer.paused) {
+                musicPlayer.play().catch(() => {});
+            }
+        }, { once: true });
+		function createPetals() {
+			// 使用蛋糕相关的emoji符号
+			const cakes = ['🎂', '🍰', '🧁', '🍮', '🍩', '🍪', '🥮', '🍫', '🍬'];
+			const cakeCount = 20; // 减少数量避免太密集
+			
+			for (let i = 0; i < cakeCount; i++) {
+				setTimeout(() => {
+					const cake = document.createElement('div');
+					cake.innerHTML = cakes[Math.floor(Math.random() * cakes.length)];
+					cake.classList.add('cake');
+					
+					// 随机位置
+					cake.style.left = Math.random() * 100 + 'vw';
+					
+					// 随机动画持续时间 (8-18秒)
+					const duration = 8 + Math.random() * 10;
+					cake.style.animationDuration = duration + 's';
+					
+					// 随机延迟 (0-5秒)
+					cake.style.animationDelay = Math.random() * 5 + 's';
+					
+					// 随机大小
+					const size = 0.8 + Math.random() * 1.5;
+					cake.style.fontSize = size + 'rem';
+					
+					// 随机透明度
+					cake.style.opacity = 0.6 + Math.random() * 0.4;
+					
+					document.body.appendChild(cake);
+					
+					// 动画结束后移除蛋糕
+					setTimeout(() => {
+						cake.remove();
+					}, duration * 1000);
+				}, i * 500); // 每隔500ms创建一个新蛋糕
+			}
+			
+			// 每隔一段时间重新创建蛋糕
+			setTimeout(createPetals, cakeCount * 500 + 10000); // 延长间隔时间
+		}
+		
+		// 页面加载后开始蛋糕动画
+		window.addEventListener('load', createPetals); 
+
+      // 礼花动画自动播放
+      function createAutoFirework() {
+          // 生成随机位置
+          const x = Math.random() * window.innerWidth;
+          const y = Math.random() * window.innerHeight;
+          
+          createFirework(x, y);
+      }
+      
+      // 页面加载时立即创建一次礼花
+      window.addEventListener('load', createAutoFirework);
+      
+      // 每隔3秒自动创建一次礼花
+      setInterval(createAutoFirework, 700);
+      
+      // 创建礼花函数
+      function createFirework(x, y) {
+          const colors = [
+              '#FF0000', '#FF7F00', '#FFFF00', '#00FF00', 
+              '#0000FF', '#4B0082', '#9400D3', '#FF1493',
+              '#00FFFF', '#FF00FF', '#FFD700', '#7CFC00'
+          ];
+          const particleCount = 80; // 粒子数量
+          const fireworkContainer = document.getElementById('fireworkContainer');
+          
+          for (let i = 0; i < particleCount; i++) {
+              const particle = document.createElement('div');
+              particle.classList.add('firework');
+              
+              // 随机颜色
+              particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+              
+              // 初始位置（点击位置）
+              particle.style.left = x + 'px';
+              particle.style.top = y + 'px';
+              
+              // 随机飞行方向和距离
+              const angle = Math.random() * Math.PI * 2;
+              const distance = 50 + Math.random() * 150;
+              const tx = Math.cos(angle) * distance;
+              const ty = Math.sin(angle) * distance;
+              
+              // 设置CSS变量供动画使用
+              particle.style.setProperty('--tx', tx + 'px');
+              particle.style.setProperty('--ty', ty + 'px');
+              
+              // 随机大小
+              const size = 2 + Math.random() * 4;
+              particle.style.width = size + 'px';
+              particle.style.height = size + 'px';
+              
+              // 随机动画时长
+              const duration = 0.5 + Math.random() * 0.8;
+              particle.style.animationDuration = duration + 's';
+              
+              fireworkContainer.appendChild(particle);
+              
+              // 动画结束后移除粒子
+              setTimeout(() => {
+                  particle.remove();
+              }, duration * 1000);
+          }
+      }
+
+
+        // 页面加载时显示“健伟寄语”的内容
+        window.onload = function() {
+            // 默认显示“健伟寄语”的内容
+            document.getElementById('sangjianwei').style.display = 'block';
+            // 给“健伟寄语”的导航链接添加激活状态
+            document.querySelector('a[href="#sangjianwei"]').classList.add('active');
+        };
+
+        // 处理导航链接的点击事件
+        document.querySelectorAll('.nav-item[href^="#"]').forEach(link => {
+            link.addEventListener('click', function() {
+                // 移除所有激活状态
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                // 添加当前激活状态
+                this.classList.add('active');
+
+                // 隐藏所有内容
+                document.querySelectorAll('.letter-content').forEach(content => {
+                    content.style.display = 'none';
+                });
+
+                // 显示对应的内容
+                const targetId = this.getAttribute('href').substring(1);
+                document.getElementById(targetId).style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

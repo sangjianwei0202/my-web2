@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/main.css" />
+    <title>暮雨青檐 - 观云阁</title>
+    <style>
+        /* 新增视频页面专属样式 */
+        .video-container {
+            position: relative;
+            max-width: 800px;
+            margin: 80px auto 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+
+        #main-video {
+            width: 100%;
+            height: 450px;
+            border-radius: 8px;
+            background: #000;
+        }
+
+        .video-controls {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 8px 15px;
+            background: #C91F37;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: "华文行楷", cursive;
+        }
+
+        .control-btn:hover {
+            background: #a8182d;
+            transform: translateY(-2px);
+        }
+
+        .timeline-container {
+            flex: 1;
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .timeline-progress {
+            height: 100%;
+            background: #C91F37;
+            border-radius: 2px;
+            width: 0%;
+        }
+
+        /* 水墨云纹装饰 */
+        .cloud-deco {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .cloud-deco.left {
+            left: -50px;
+            top: 30%;
+            width: 200px;
+            animation: drift 25s linear infinite;
+        }
+
+        .cloud-deco.right {
+            right: -50px;
+            top: 50%;
+            width: 180px;
+            animation: drift 30s linear infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translateX(0) scale(1); }
+            50% { transform: translateX(100px) scale(0.95); }
+            100% { transform: translateX(0) scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <audio id="bg-music" loop>
+        <source src="assets/music/rain.mp3" type="audio/mpeg">
+        您的浏览器不支持音频播放
+    </audio>
+
+    <header class="header">
+        <h1 class="main-title">暮雨青檐</h1>
+        <div class="subtitle">2017-2025 周末特快列车</div>
+    </header>
+
+    <nav class="nav-menu">
+        <!-- 更新后的导航菜单 -->
+		<a href="#" class="nav-item" id="music-control">听雨卷</a>
+		<a href="huiyi.html" class="nav-item">拾叶集</a>
+		<a href="xiangyaoshuodehua.html" class="nav-item">檐铃语</a>
+		<a href="guanyunge.html" class="nav-item">观云阁</a>
+		<a href="about.html" class="nav-item">关于</a>
+    </nav>
+
+    <!-- 水墨云纹SVG -->
+    <svg class="cloud-deco left" viewBox="0 0 100 50">
+        <path fill="#2E6171" d="M20,25 Q30,5 40,25 Q50,45 60,25 Q70,5 80,25 C85,35 75,45 60,40 Q45,35 30,40 Q15,45 20,35 Z"/>
+    </svg>
+
+    <svg class="cloud-deco right" viewBox="0 0 100 50">
+        <path fill="#2E6171" d="M15,20 Q25,0 35,20 Q45,40 55,20 Q65,0 75,20 C80,30 70,40 55,35 Q40,30 25,35 Q10,40 15,30 Z"/>
+    </svg>
+
+    <section class="video-container">
+        <video id="main-video" src="assets/videos/memory.mp4"></video>
+        <div class="video-controls">
+            <button class="control-btn" id="play-btn">播放</button>
+            <button class="control-btn" id="mute-btn">静音</button>
+            <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
+            <div class="timeline-container" id="timeline">
+                <div class="timeline-progress" id="progress"></div>
+            </div>
+            <button class="control-btn" id="fullscreen">全屏</button>
+        </div>
+    </section>
+
+    <script>
+        const video = document.getElementById('main-video');
+        const playBtn = document.getElementById('play-btn');
+        const muteBtn = document.getElementById('mute-btn');
+        const volume = document.getElementById('volume');
+        const timeline = document.getElementById('timeline');
+        const progress = document.getElementById('progress');
+
+        // 播放控制
+        playBtn.addEventListener('click', () => {
+            if(video.paused) {
+                video.play();
+                playBtn.textContent = '暂停';
+            } else {
+                video.pause();
+                playBtn.textContent = '播放';
+            }
+        });
+
+        // 静音控制
+        muteBtn.addEventListener('click', () => {
+            video.muted = !video.muted;
+            muteBtn.textContent = video.muted ? '取消静音' : '静音';
+        });
+
+        // 音量控制
+        volume.addEventListener('input', (e) => {
+            video.volume = e.target.value;
+        });
+
+        // 进度条控制
+        timeline.addEventListener('click', (e) => {
+            const rect = timeline.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            video.currentTime = pos * video.duration;
+        });
+
+        // 更新进度条
+        video.addEventListener('timeupdate', () => {
+            const progressPercent = (video.currentTime / video.duration) * 100;
+            progress.style.width = `${progressPercent}%`;
+        });
+
+        // 全屏控制
+        document.getElementById('fullscreen').addEventListener('click', () => {
+            if(video.requestFullscreen) {
+                video.requestFullscreen();
+            } else if(video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen();
+            }
+        });
+
+        // 初始化音乐控制（复用原有逻辑）
+        const musicPlayer = document.getElementById('bg-music');
+        // ...原有音乐控制代码...
+    </script>
+</body>
+</html>
