@@ -22,6 +22,7 @@
         <a href="#" class="nav-item" id="music-control">听雨卷</a>
         <a href="huiyi.html" class="nav-item">拾叶集</a>
         <a href="xiangyaoshuodehua.html" class="nav-item">檐铃语</a>
+        <a href="guanyunge.html" class="nav-item">观云阁</a>
         <a href="about.html" class="nav-item">关于</a>
     </nav>
 
@@ -40,6 +41,53 @@
         </div>
     </section>
 
-    <script src="js/main.js"></script>
+    <script>
+        // 音乐控制功能
+        const musicPlayer = document.getElementById('bg-music');
+        const musicControl = document.getElementById('music-control');
+        let isPlaying = false;
+        
+        // 初始化音乐状态
+        function initMusic() {
+            const savedState = localStorage.getItem('musicState');
+            isPlaying = savedState === 'playing';
+            
+            musicPlayer.volume = 0.3;
+            if (isPlaying) {
+                musicPlayer.play().catch(() => {});;
+                musicControl.classList.add('music-playing');
+            } else {
+                musicPlayer.play().catch(() => {
+                    document.body.addEventListener('click', () => {
+                        musicPlayer.play().catch(() => {});;
+                    }, { once: true });
+                });
+            }
+        }
+        
+        // 点击控制
+        musicControl.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            if (isPlaying) {
+                musicPlayer.play();
+                musicControl.classList.add('music-playing');
+                localStorage.setItem('musicState', 'playing');
+            } else {
+                musicPlayer.pause();
+                musicControl.classList.remove('music-playing');
+                localStorage.setItem('musicState', 'paused');
+            }
+        });
+        
+        // 初始化执行
+        initMusic();
+        
+        // 自动播放处理
+        document.body.addEventListener('click', () => {
+            if (isPlaying && musicPlayer.paused) {
+                musicPlayer.play().catch(() => {});;
+            }
+        }, { once: true });
+    </script>
 </body>
 </html>

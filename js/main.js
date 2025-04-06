@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         "photo2": {
             title: "丑照",
-            content: "我拍了你的丑照，可以不怪我吗，嘻嘻",
+            content: "拍了你的丑照，对不起！可以不怪我吗，嘻嘻",
             location: "某个地方"
         }
     };
